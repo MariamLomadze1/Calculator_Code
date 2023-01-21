@@ -1,0 +1,24 @@
+#include <regex>
+#include <map>
+#include <string>
+#include <stdio.h>
+using namespace std;
+#include <iostream>
+
+int translate_roman_numeral(string input)
+{ // რომაული რიცხვები, რომელიც წარმოადგენს ტექსტურ მონაცემს გადაყავს ინტეჯერის ფორმატში
+    map<char, int> roman_numerals = {{'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000}};
+    int output = 0;
+    for (int i = 0; i < input.length(); i++)
+    {
+        if (i > 0 && roman_numerals[input[i]] > roman_numerals[input[i - 1]])
+        {
+            output += roman_numerals[input[i]] - 2 * roman_numerals[input[i - 1]];
+        }
+        else
+        {
+            output += roman_numerals[input[i]];
+        }
+    }
+    return output;
+}
